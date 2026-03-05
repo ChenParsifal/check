@@ -24,7 +24,7 @@ jobs:
           # 对于多个账号一定会有人机验证问题，且因为是密码，有一定的安全风险
           # PHONE: ${{ secrets.PHONE }}
           # PASSWORD: ${{ secrets.PASSWORD }}
-          TOKEN: z9rJymsPpdErVfeXr09wMlJe
+          TOKEN: ${{ secrets.TOKEN }}
           # SC3_SENDKEY: ${{ secrets.SC3_SENDKEY }}
           # SC3_UID: ${{ secrets.SC3_UID }}
           EXIT_WHEN_FAIL: ${{ vars.EXIT_WHEN_FAIL }}
