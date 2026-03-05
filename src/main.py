@@ -80,9 +80,6 @@ def config_logger():
 
 if __name__ == '__main__':
     config_logger()
-
-    print('本项目源代码仓库：https://github.com/xxyz30/skyland-auto-sign(因白嫖action被github封禁)')
-    print('https://gitee.com/FancyCabbage/skyland-auto-sign')
     logging.info('=========starting==========')
     start_time = time.time()
     success, all_logs = start()
@@ -90,6 +87,16 @@ if __name__ == '__main__':
     end_time = time.time()
     logging.info(f'complete with {(end_time - start_time) * 1000} ms')
     logging.info('===========ending============')
+
+    # 发送 WxPusher 通知
+    from wxpusher import WxPusher
+    from datetime import datetime
+    status = "✅ 全部成功" if success else "❌ 存在失败"
+    WxPusher.send_message(
+        f"【任务通知】\n时间:{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n状态:{status}\n\n📋 日志：\n" + "\n".join(all_logs),
+        uids=["UID_uQq8kfnjGlqSdzJ0wwMx9nQUQvW2"],
+        token="AT_bCIrdXZBHDYRgWd6lj07UndOZLPpdu9b"
+    )
 
     logging.info(f'exit_when_fail_env: {exit_when_fail_env}, success: {success}')
     if (exit_when_fail_env == "on") and not success:
